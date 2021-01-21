@@ -20,7 +20,7 @@ else:
 # Valid transaction broadcast modes for the `POST /txs` endpoint of the
 # Crypto.com REST API.
 SyncMode = Literal["sync", "async", "block"]
-DEFAULT_BECH32_HRP_BASE = "basecro"
+DEFAULT_BECH32_HRP_BASE = "basetcro"
 
 
 class Transaction:
@@ -40,9 +40,9 @@ class Transaction:
         sequence: int,
         fee: int = 0,
         gas: int = 200000,
-        fee_denom: str = "basecro",
+        fee_denom: str = "basetcro",
         memo: str = "",
-        chain_id: str = "crypto-crocncl-1",
+        chain_id: str = "crossfire",
         sync_mode: SyncMode = "sync",
     ) -> None:
         self._wallet = wallet
