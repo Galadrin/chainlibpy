@@ -44,6 +44,7 @@ class Transaction:
         memo: str = "",
         chain_id: str = "crossfire",
         sync_mode: SyncMode = "sync",
+        timeout: int = 0,
     ) -> None:
         self._wallet = wallet
         self._account_num = account_num
@@ -55,6 +56,7 @@ class Transaction:
         self._chain_id = chain_id
         self._sync_mode = sync_mode
         self._msgs: List[dict] = []
+        self._timeout = timeout
 
     def add_transfer(
         self, to_address: str, amount: int, base_denom: str = DEFAULT_BECH32_HRP_BASE
@@ -81,6 +83,7 @@ class Transaction:
                     "amount": [{"amount": str(self._fee), "denom": self._fee_denom}],
                 },
                 "memo": self._memo,
+                "timeout_height":str(self._timeout),
                 "signatures": [
                     {
                         "signature": self._sign(),
@@ -121,6 +124,7 @@ class Transaction:
             "sequence": str(self._sequence),
             "chain_id": self._chain_id,
             "memo": self._memo,
+            "timeout_height":str(self._timeout),
             "fee": {
                 "gas": str(self._gas),
                 "amount": [{"amount": str(self._fee), "denom": self._fee_denom}],
